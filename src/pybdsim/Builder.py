@@ -323,10 +323,10 @@ class Element(ElementBase):
             for k in splittable_strengths:
                 v = other_kwargs[k]
                 if type(v) == tuple:
-                    nv = v[0] * (length / total_length)
+                    nv = v[0] * (sub_section_length / total_length)
                     kwargs[k] = (nv, v[1])
                 else:
-                    kwargs[k] = v * (length / total_length)
+                    kwargs[k] = v * (sub_section_length / total_length)
             return kwargs
 
         i = 0
@@ -335,14 +335,14 @@ class Element(ElementBase):
             length = round(point - accumulated_length, 15)
             accumulated_length += length
             kws = split_strength(other_kwargs, length)
-            split_elements.append(This(name, category, l=length, **kws))
+            split_elements.append(This(name, l=length, **kws))
             i += 1
 
         # Add the final element (for n points we have n+1 elements, so
         # we add the last one here "by hand").
         left_over_length = round(total_length - accumulated_length, 15)
         kws = split_strength(other_kwargs, left_over_length)
-        split_elements.append(This("{}_split_{}".format(self['name'], i + 1), category, l=left_over_length, **kws))
+        split_elements.append(This("{}_split_{}".format(self['name'], i + 1), l=left_over_length, **kws))
 
         return split_elements
 
