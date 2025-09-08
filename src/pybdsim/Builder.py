@@ -957,6 +957,15 @@ class Material(GmadObject):
         GmadObject.__init__(self, "matdef",name,**kwargs)
 
 
+class Modulator(GmadObject):
+    """
+    A modulator definition. Any kwargs will be written as parameter=value.
+    parameter=(value,unit) -> parameter=value*unit
+    """
+    def __init__(self,name,**kwargs):
+        GmadObject.__init__(self, "modulator",name,**kwargs)
+
+
 class NewColour(GmadObject):
     """
     A newcolour definition. Any kwargs will be written as parameter=value.
@@ -1478,7 +1487,7 @@ class Machine(object):
         the value (not the key) is added to the internal list without the key.
 
         Objects:
-        Aperture, Atom, BLM, CavityModel, Crystal, Field, Laser, Material, NewColour
+        Aperture, Atom, BLM, CavityModel, Crystal, Field, Laser, Material, Modulator, NewColour
         Placement, Query, Region, SamplerPlacement, Scorer, ScorerMesh, XSecBias.
         """
         if type(obj) in [list, tuple]:
