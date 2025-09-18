@@ -35,7 +35,8 @@ dependencies = [
   "pymadx",
   "pytransport",
   "jinja2",
-  "packaging"
+  "packaging",
+  "pyhepmc"
 ]
 
 [project.optional-dependencies]
@@ -44,8 +45,7 @@ boost_histogram = ["boost-histogram"]
 cpymad = ["cpymad", "mergedeep"]
 pysad = ["pysad"]
 pymad8 = ["pymad8"]
-pyhepmc = ["pyhepmc"]
-all = ["awkward", "uproot", "pandas", "pint", "boost-histogram", "cpymad", "mergedeep", "pysad", "pymad8", "pyhepmc"]
+all = ["awkward", "uproot", "pandas", "pint", "boost-histogram", "cpymad", "mergedeep", "pysad", "pymad8"]
 dev = ["pytest", "sphinx", "sphinx-rtd-theme"]
 
 [project.urls]

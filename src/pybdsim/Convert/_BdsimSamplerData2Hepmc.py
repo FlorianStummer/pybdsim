@@ -1,13 +1,5 @@
 import sys
-
-# requires the pyhepmc package
-try:
-    import pyhepmc as _hep
-except ImportError:
-    # pip install .[pyhepmc] --user
-    print("pyhepmc module not found.")
-    sys.exit(1)
-
+import pyhepmc as _hep
 import os.path as _path
 import pybdsim.Data as _Data
 
@@ -23,12 +15,7 @@ def BdsimSamplerData2Hepmc2(bdsimFile,outputFileName,samplerName,ZForHits=0,pidL
     pidList - (list[int]) - list of PDG IDs to include in output file (leave empty for all)
     """
 
-    if not _path.isfile(bdsimFile):
-        raise IOError("File {} not found!".format(bdsimFile))
-    else:
-        print("Loading input file: {}.".format(bdsimFile))
-        fBDS = _Data.Load(bdsimFile)
-
+    fBDS = _Data.Load(bdsimFile)
     fHEP = _hep.io.WriterAsciiHepMC2(outputFileName)
 
     mToMM = 1e3
@@ -80,12 +67,7 @@ def BdsimSamplerData2Hepmc3(bdsimFile,outputFileName,samplerName,ZForHits=0,pidL
     pidList - (list[int]) - list of PDG IDs to include in output file (leave empty for all)
     weightsName - (str) - user assigned name for statistical weights (leave "" to exclude weights)
     """
-    if not _path.isfile(bdsimFile):
-        raise IOError("File {} not found!".format(bdsimFile))
-    else:
-        print("Loading input file: {}.".format(bdsimFile))
-        fBDS = _Data.Load(bdsimFile)
-
+    fBDS = _Data.Load(bdsimFile)
     fHEP = _hep.io.WriterAscii(outputFileName)
 
     run_info = _hep.GenRunInfo()
