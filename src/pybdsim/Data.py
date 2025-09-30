@@ -765,13 +765,13 @@ def WriteSamplerDataToROOTFile(inputFileName, outputFileName, samplerName):
     :type samplerName: str
     """
 
-    x = _np.array([0.0]).astype(_np.double)
-    y = _np.array([0.0]).astype(_np.double)
-    xp = _np.array([0.0]).astype(_np.double)
-    yp = _np.array([0.0]).astype(_np.double)
-    p = _np.array([0.0]).astype(_np.double)
+    x = _np.array([0]).astype(_np.double)
+    y = _np.array([0]).astype(_np.double)
+    xp = _np.array([0]).astype(_np.double)
+    yp = _np.array([0]).astype(_np.double)
+    p = _np.array([0]).astype(_np.double)
     partID = _np.array([0]).astype(_np.int32)
-    weight = _np.array([0.0]).astype(_np.double)
+    weight = _np.array([0]).astype(_np.double)
 
     outputFile = _ROOT.TFile(outputFileName, 'recreate')
     outputTree = _ROOT.TTree(samplerName, samplerName)
