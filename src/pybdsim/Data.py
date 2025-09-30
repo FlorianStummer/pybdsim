@@ -772,7 +772,7 @@ def WriteSamplerDataToROOTFile(inputFileName, outputFileName, samplerName):
     zp = _np.array([0]).astype(_np.double)
     p = _np.array([0]).astype(_np.double)
     t = _np.array([0]).astype(_np.double)
-    partID = _np.array([0]).astype(_np.int32)
+    pdgID = _np.array([0]).astype(_np.int32)
     weight = _np.array([0]).astype(_np.double)
 
     outputFile = _ROOT.TFile(outputFileName, 'recreate')
@@ -785,7 +785,7 @@ def WriteSamplerDataToROOTFile(inputFileName, outputFileName, samplerName):
     outputTree.Branch("zp", zp, "zp/D")
     outputTree.Branch("p", p, "p/D")
     outputTree.Branch("t", t, "t/D")
-    outputTree.Branch("partID", partID, "partID/I")
+    outputTree.Branch("pdgID", pdgID, "pdgID/I")
     outputTree.Branch("weight", weight, "weight/D")
 
     inputData = Load(inputFileName)
@@ -811,7 +811,7 @@ def WriteSamplerDataToROOTFile(inputFileName, outputFileName, samplerName):
         zp[0] = zpi
         p[0] = pi
         t[0] = ti
-        partID[0] = partIDi
+        pdgID[0] = partIDi
         weight[0] = weighti
         outputTree.Fill()
 
