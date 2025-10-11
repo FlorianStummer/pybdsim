@@ -35,7 +35,8 @@ dependencies = [
   "pymadx",
   "pytransport",
   "jinja2",
-  "packaging"
+  "packaging",
+  "pyhepmc"
 ]
 
 [project.optional-dependencies]
