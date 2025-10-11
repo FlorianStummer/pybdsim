@@ -765,13 +765,15 @@ def WriteSamplerDataToROOTFile(inputFileName, outputFileName, samplerName):
     :type samplerName: str
     """
 
-    x = _np.array([0.0]).astype(_np.double)
-    y = _np.array([0.0]).astype(_np.double)
-    xp = _np.array([0.0]).astype(_np.double)
-    yp = _np.array([0.0]).astype(_np.double)
-    p = _np.array([0.0]).astype(_np.double)
-    partID = _np.array([0]).astype(_np.int32)
-    weight = _np.array([0.0]).astype(_np.double)
+    x = _np.array([0]).astype(_np.double)
+    y = _np.array([0]).astype(_np.double)
+    xp = _np.array([0]).astype(_np.double)
+    yp = _np.array([0]).astype(_np.double)
+    zp = _np.array([0]).astype(_np.double)
+    p = _np.array([0]).astype(_np.double)
+    t = _np.array([0]).astype(_np.double)
+    pdgID = _np.array([0]).astype(_np.int32)
+    weight = _np.array([0]).astype(_np.double)
 
     outputFile = _ROOT.TFile(outputFileName, 'recreate')
     outputTree = _ROOT.TTree(samplerName, samplerName)
@@ -780,8 +782,10 @@ def WriteSamplerDataToROOTFile(inputFileName, outputFileName, samplerName):
     outputTree.Branch("y", y, "y/D")
     outputTree.Branch("xp", xp, "xp/D")
     outputTree.Branch("yp", yp, "yp/D")
+    outputTree.Branch("zp", zp, "zp/D")
     outputTree.Branch("p", p, "p/D")
-    outputTree.Branch("partID", partID, "partID/I")
+    outputTree.Branch("t", t, "t/D")
+    outputTree.Branch("pdgID", pdgID, "pdgID/I")
     outputTree.Branch("weight", weight, "weight/D")
 
     inputData = Load(inputFileName)
@@ -790,20 +794,25 @@ def WriteSamplerDataToROOTFile(inputFileName, outputFileName, samplerName):
     samplerY = sampler.data['y']
     samplerXp = sampler.data['xp']
     samplerYp = sampler.data['yp']
+    samplerZp = sampler.data['zp']
     samplerP = sampler.data['p']
+    samplerT = sampler.data['T']
     samplerPartID = sampler.data['partID']
     samplerWeight = sampler.data['weight']
 
     outputFile.cd()
 
-    for i in range(len(samplerX)):
-        x[0] = samplerX[i]
-        y[0] = samplerY[i]
-        xp[0] = samplerXp[i]
-        yp[0] = samplerYp[i]
-        p[0] = samplerP[i]
-        partID[0] = samplerPartID[i]
-        weight[0] = samplerWeight[i]
+    for xi, yi, xpi, ypi, zpi, pi, ti, partIDi, weighti in zip(samplerX, samplerY, samplerXp, samplerYp, samplerZp,
+                                                               samplerP, samplerT, samplerPartID, samplerWeight):
+        x[0] = xi
+        y[0] = yi
+        xp[0] = xpi
+        yp[0] = ypi
+        zp[0] = zpi
+        p[0] = pi
+        t[0] = ti
+        pdgID[0] = partIDi
+        weight[0] = weighti
         outputTree.Fill()
 
     outputTree.Write()
