@@ -4,7 +4,13 @@ _allowedparticles = frozenset([
     'e-',
     'e+',
     'proton',
-    'gamma'
+    'gamma',
+    'pi+',
+    'pi-',
+    'kaon+',
+    'kaon-',
+    'mu+',
+    'mu-'
 ])
 
 _allowedflags = frozenset([
